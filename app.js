@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const AppError = require('./utils/appError');
 const userRouter = require('./routes/users');
 const globalErrorHandler = require('./controllers/errorController');
@@ -7,6 +8,9 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+
+// Cors Middleware
+app.use(cors());
 
 // Router mounting
 app.use('/api/v1', userRouter);
