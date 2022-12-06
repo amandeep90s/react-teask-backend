@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 // Router mounting
-app.use('/api/v1/users', userRouter);
+app.use('/api/v1', userRouter);
 
 // Handling unhandled errors
 app.all('*', (req, res, next) => {

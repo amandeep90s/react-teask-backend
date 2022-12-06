@@ -23,7 +23,6 @@ const signup = catchAsync(async (req, res, next) => {
     password,
     passwordConfirm,
   });
-
   const token = signToken(newUser._id, newUser.colorPreference);
   res.status(201).json({ status: 'success', token, data: { user: newUser } });
 });
