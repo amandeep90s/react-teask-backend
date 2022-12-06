@@ -5,6 +5,7 @@ const {
   logout,
   signup,
   updateUser,
+  protectedRoute,
 } = require('../controllers/authController');
 
 const router = express.Router();
@@ -15,8 +16,8 @@ router.post('/login', login);
 // Logout route
 router.get('/logout', logout);
 // Dashboard route
-router.get('/dashboard', dashboard);
+router.get('/dashboard', protectedRoute, dashboard);
 // Update user route
-router.patch('/users/:id', updateUser);
+router.patch('/users/:id', protectedRoute, updateUser);
 
 module.exports = router;
