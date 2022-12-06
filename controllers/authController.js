@@ -46,4 +46,30 @@ const login = catchAsync(async (req, res, next) => {
   res.status(200).json({ status: 'success', token });
 });
 
-module.exports = { login, signup };
+// Logout user method
+const logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};
+
+// Dashboard user method
+const dashboard = (req, res, next) => {
+  res.status(200).json({ status: 'success' });
+};
+
+// Update user method
+const updateUser = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+  res.status(200).json({ status: 'success' });
+});
+
+module.exports = { dashboard, login, logout, signup, updateUser };
